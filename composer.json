@@ -1,0 +1,22 @@
+{
+    "name": "anyuzhe/ModelORG",
+    "description": "options json for Model.",
+    "require": {
+        "php": ">=5.5.9",
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "anyuzhe",
+            "email": "68067348@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ZL\\ModelORG\\": "src/"
+        }
+    },
+    "bin": [
+    ]
+}
+
