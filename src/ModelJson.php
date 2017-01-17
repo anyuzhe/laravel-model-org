@@ -4,7 +4,7 @@ namespace ZL\Traites;
 
 trait ModelJson
 {
-    //$json_array = []
+    //$json_array = []1
 
     public $options_number = 0;
 
