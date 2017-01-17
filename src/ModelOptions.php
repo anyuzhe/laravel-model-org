@@ -1,13 +1,17 @@
 <?php
 
-namespace App\ZL\Traites;
+namespace ZL\Traites;
 
 trait ModelOptions
 {
-    //$options_number=0 $options_arry = []
+    //$options_number=0 $options_array = []
 
     public $options_number = 0;
 
+    public function getOptionsArry()
+    {
+        return $this->options_array;
+    }
     public function appendOption($target)
     {
         $this->options_number |= pow(2,$target);
@@ -27,18 +31,19 @@ trait ModelOptions
 
     public function appendOptionByTitle($title)
     {
-        $this->appendOption(array_search($title,$this->options_arry));
+        $this->appendOption(array_search($title,$this->options_array));
     }
 
     public function removeOptionByTitle($title)
     {
-        $this->removeOption(array_search($title,$this->options_arry));
+        $this->removeOption(array_search($title,$this->options_array));
     }
 
     public function setOptionsByRequest()
     {
-        foreach ($this->options_arry as $k=>$v) {
-            $_has = isset($_REQUEST[$v])?$_REQUEST[$v]:false;
+        foreach ($this->options_array as $k=>$v) {
+            $req = $GLOBALS['request']->all();
+            $_has = isset($req[$v])?$req[$v]:false;
             if($_has){
                 $this->appendOption($k);
             }
@@ -48,7 +53,7 @@ trait ModelOptions
     public function setOptionsAttribute($value)
     {
         $this->setOptionsByRequest();
-        return $this->options_number;
+        $this->attributes['options'] = $this->options_number;
     }
 
     public function getOptionsAttribute($value)
@@ -59,7 +64,7 @@ trait ModelOptions
     protected function getOptionsArray($value)
     {
         $this->options_number = $value;
-        foreach ($this->options_arry as $k=>$v) {
+        foreach ($this->options_array as $k=>$v) {
             if($this->containOption($k)){
                 $_value = 1;
             }else{
